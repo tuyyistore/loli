@@ -1,0 +1,22 @@
+{
+	"name": "SchoolWork List",
+	"short_name": "SWL",
+   "start_url": "./",
+	"icons": [
+		{
+			"src": "./android-chrome-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+         "purpose": "maskable any"
+		},
+		{
+			"src": "./android-chrome-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+         "purpose": "maskable any"
+		}
+	],
+	"theme_color": "#FFFFFF",
+	"background_color": "#FFFFFF",
+	"display": "standalone"
+}

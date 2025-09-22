@@ -1,0 +1,455 @@
+---
+import ThemeCard from "../components/ThemeCard.astro";
+import Toggle from "../components/Toggle.astro";
+import Heading from "../components/Heading.astro";
+import Layout from "../layouts/Layout.astro";
+import Input from "../components/Input.astro";
+import Radio from "../components/Radio.astro";
+---
+
+<head>
+	<script async src="./catiline.min.js" is:raw></script>
+</head>
+<Layout title="SWL - Settings">
+	<div id="toast-success" class="alert alert-success invisible fixed bottom-4 right-4 z-50 max-w-sm shadow-lg max-md:bottom-auto max-md:top-4 max-md:max-w-[75%]">
+		<div>
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"
+				><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
+			>
+			<span>Your settings has been applied!</span>
+		</div>
+	</div>
+	<div id="toast-error" class="alert alert-error invisible fixed bottom-4 right-4 z-50 max-w-sm shadow-lg max-md:bottom-auto max-md:top-4 max-md:max-w-[75%]">
+		<div>
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"
+				><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
+			>
+			<span>Owh Nyoo, Sumthiing wen wong!</span>
+		</div>
+	</div>
+	<input type="checkbox" id="reset-modal" class="modal-toggle" />
+	<div class="modal modal-bottom sm:modal-middle">
+		<div class="modal-box">
+			<h3 class="text-lg font-bold">All of your settings has been reset to default.</h3>
+			<p class="py-4">
+				Click on the&nbsp;<button class="btn btn-xs btn-primary">Save and Apply</button>&nbsp;to save and apply this change. Otherwise, simply refresh this page to cancel any changes.
+			</p>
+			<div class="modal-action">
+				<label for="reset-modal" class="btn">Dismiss</label>
+			</div>
+		</div>
+	</div>
+	<main class="m-auto min-h-[96vh] max-w-[80%] p-6 max-md:max-w-full">
+		<h1 class="prose-2xl font-bold">Change <span class="text-gradient">Settings</span></h1>
+		<p class="instructions prose mb-4">
+			Settings are saved to the browser's localstorage, it won't sync to other devices.<br />
+		</p>
+		<div id="setting-tabs" class="tabs tabs-boxed border-base-content/10 border font-semibold">
+			<a id="general" class="tab tab-active">General</a>
+			<a id="personalization" class="tab">Personalization</a>
+			<a id="backup" class="tab">Backup</a>
+		</div>
+		<div id="setting-container" class="border-base-content/10 bg-base-300/80 my-4 rounded-lg border py-6 px-40 max-lg:px-6">
+			<div id="general">
+				<div class="flex flex-col pb-4">
+					<Heading>Class</Heading>
+					<div class="mb-4 flex flex-wrap">
+						<div id="setting-classes" class="flex flex-wrap">
+							<Radio title="XI-A MIA" id="setting-xiamia" />
+							<Radio title="XI-B MIA" id="setting-xibmia" />
+							<Radio title="XI-C MIA" id="setting-xicmia" checked="" />
+							<Radio title="XI-D MIA" id="setting-xidmia" />
+							<Radio title="XI-A IIS" id="setting-xiaiis" />
+							<Radio title="XI-B IIS" id="setting-xibiis" />
+							<Radio title="XI-C IIS" id="setting-xiciis" />
+							<Radio title="XI-D IIS" id="setting-xidiis" />
+						</div>
+					</div>
+					<Heading>Performance</Heading>
+					<div class="mb-4 flex flex-wrap">
+						<Toggle text="Enable Turbo JS" id="setting-turbo-js" tooltip="This library preload and cache webpages in the background to speed up loading times." checked="" />
+						<Toggle text="Enable Analytic" id="setting-analytic" tooltip="This will turn off all analytics from this website." checked="" />
+						<Toggle text="Enable Ads" id="setting-ads" tooltip="This will turn off all ads from this website." checked="" />
+						<Toggle text="Disable disclaimer on posts" id="setting-disclaimer" tooltip="This will turn off the disclaimer screen when viewing post" />
+					</div>
+					<Heading>Other</Heading>
+					<div class="mb-4 flex flex-wrap">
+						<Toggle text="Use custom Backend server URL" id="setting-custom-backend-url" tooltip="If this is turned on, the website will fetch data from the URL provided." />
+						<Input title="Custom Backend URL" id="setting-custom-backend-url-text" placeholder="https://schoolworklist.pages.dev/" />
+					</div>
+				</div>
+			</div>
+			<div id="personalization" class="hidden">
+				<Heading>Change Profile</Heading>
+				<div class="mb-4 flex flex-wrap">
+					<Input title="Customize your username" id="setting-username" placeholder="Anonymous" />
+					<Input title="Customize your profile picture" id="setting-profile" placeholder="" />
+				</div>
+				<Heading>Change Main Theme</Heading>
+				<div class="mb-4 flex flex-wrap">
+					<ThemeCard theme="dark" />
+					<ThemeCard theme="dracula" />
+					<ThemeCard theme="night" />
+					<ThemeCard theme="halloween" active="theme-selected" />
+					<ThemeCard theme="business" />
+					<ThemeCard theme="forest" />
+					<ThemeCard theme="black" />
+					<ThemeCard theme="luxury" />
+					<ThemeCard theme="coffee" />
+					<ThemeCard theme="light" />
+					<ThemeCard theme="emerald" />
+					<ThemeCard theme="corporate" />
+					<ThemeCard theme="garden" />
+					<ThemeCard theme="lofi" />
+					<ThemeCard theme="fantasy" />
+					<ThemeCard theme="wireframe" />
+					<ThemeCard theme="cmyk" />
+					<ThemeCard theme="autumn" />
+					<ThemeCard theme="acid" />
+					<ThemeCard theme="lemonade" />
+					<ThemeCard theme="winter" />
+					<ThemeCard theme="valentine" />
+					<ThemeCard theme="cyberpunk" />
+				</div>
+			</div>
+			<div id="backup" class="hidden">
+				<Heading>Import / Export as JSON</Heading>
+				<div class="mb-4 flex flex-wrap">
+					<input id="setting-import-file" type="file" class="file-input file-input-primary mx-1 mt-4 flex-1 max-md:min-w-full" />
+					<button id="setting-import" class="btn btn-primary mx-1 mt-4 max-lg:mt-2" onclick="handleSettingToggles(this)">Import</button>
+					<button id="setting-export" class="btn btn-primary mx-1 mt-4 max-lg:mt-2" onclick="handleSettingToggles(this)">Export</button>
+				</div>
+			</div>
+			<div id="setting-button" class="flex justify-end max-md:flex-col">
+				<label class="btn btn-error m-1" for="reset-modal" onclick="resetSettings()">Reset defaults</label>
+				<button class="btn btn-primary m-1" onclick="saveSettings()">Save and Apply</button>
+			</div>
+		</div>
+	</main>
+	<script is:inline>
+		function showToastSuccess(message) {
+			let toastSuccess = document.getElementById("toast-success");
+			toastSuccess.querySelector("span").innerText = message;
+			toastSuccess.classList.add("show");
+			setTimeout(function () {
+				toastSuccess.classList.remove("show");
+			}, 3000);
+		}
+		function showToastError(message) {
+			let toastError = document.getElementById("toast-error");
+			toastError.querySelector("span").innerText = message;
+			toastError.classList.add("show");
+			setTimeout(function () {
+				toastError.classList.remove("show");
+			}, 3000);
+		}
+	</script>
+	<script is:inline>
+		var settingsTab = document.getElementById("setting-tabs");
+		var activeTab = document.getElementById("setting-tabs").querySelector(".tab-active");
+		var settingsContainer = document.getElementById("setting-container");
+
+		function switchSettingsTab(obj) {
+			activeTab.classList.toggle("tab-active");
+			obj.classList.toggle("tab-active");
+			activeTab = obj;
+		}
+
+		function switchSettingsContainer(obj) {
+			Array.from(settingsContainer.children).forEach((container) => {
+				if (container.id == "setting-button") return;
+				container.classList.add("hidden");
+			});
+			settingsContainer.querySelector("#" + obj.id).classList.remove("hidden");
+		}
+
+		Array.from(settingsTab.children).forEach((tab) => {
+			tab.addEventListener("click", () => {
+				if (tab.classList.contains("tab-active")) return;
+				switchSettingsTab(tab);
+				switchSettingsContainer(tab);
+			});
+		});
+	</script>
+	<script is:inline>
+		function handleSettingToggles(elementToggle) {
+			switch (elementToggle.id) {
+				case "setting-turbo-js":
+				case "setting-analytic":
+				case "setting-ads":
+				case "setting-disclaimer":
+					break;
+				case "setting-custom-backend-url":
+					document.getElementById("setting-custom-backend-url-text").disabled = !elementToggle.checked;
+					break;
+				case "setting-import":
+					handleSettingImport();
+					break;
+				case "setting-export":
+					handleSettingExport();
+					break;
+				default:
+					if (elementToggle.id.includes("theme-")) {
+						handleSettingTheme(elementToggle);
+						break;
+					}
+					console.log("Setting '", elementToggle.id, "' does not exist");
+					break;
+			}
+		}
+
+		function handleSettingTheme(elementToggle) {
+			Array.from(document.getElementsByClassName("theme-selected")).forEach((themeCard) => {
+				themeCard.classList.remove("theme-selected");
+			});
+			elementToggle.classList.add("theme-selected");
+			document.querySelector("body").dataset.theme = elementToggle.id.slice(6);
+		}
+
+		function handleSettingClass(elementToggle) {
+			Array.from(document.getElementsByClassName("class-selected")).forEach((classCard) => {
+				classCard.classList.remove("class-selected");
+			});
+			elementToggle.classList.add("class-selected");
+		}
+
+		async function saveSettings() {
+			let settings = await localforage.getItem("settings");
+			var ll = await localforage.getItem("ll");
+			if (!ll) {
+				await createAnalytic();
+				ll = await localforage.getItem("ll");
+			}
+			settings = {
+				class: document.querySelector(".class-selected").id,
+				"turbo-js": document.getElementById("setting-turbo-js").checked,
+				"custom-backend-url": document.getElementById("setting-custom-backend-url").checked,
+				"custom-backend-url-text": document.getElementById("setting-custom-backend-url-text").value,
+				analytic: document.getElementById("setting-analytic").checked,
+				ads: document.getElementById("setting-ads").checked,
+				disclaimer: document.getElementById("setting-disclaimer").checked,
+				theme: document.querySelector(".theme-selected").id.slice(6),
+				username: document.getElementById("setting-username").value || document.getElementById("setting-username").placeholder,
+				profile: document.getElementById("setting-profile").value || document.getElementById("setting-profile").placeholder,
+				identifier: ll["ll_iden"],
+			};
+			localforage.setItem("settings", settings).then(function () {
+				applySettings();
+				cw(analytic());
+			});
+			showToastSuccess("Settings has been successfully applied!");
+		}
+
+		async function resetSettings() {
+			handleSettingClass(document.getElementById("setting-xicmia"));
+			handleSettingTheme(document.getElementById("theme-halloween"));
+			document.getElementById("setting-turbo-js").checked = true;
+			document.getElementById("setting-custom-backend-url").checked = false;
+			document.getElementById("setting-custom-backend-url-text").disabled = true;
+			document.getElementById("setting-custom-backend-url-text").value = "";
+			document.getElementById("setting-analytic").checked = true;
+			document.getElementById("setting-ads").checked = true;
+			document.getElementById("setting-disclaimer").checked = false;
+			document.getElementById("setting-username").value = document.getElementById("setting-username").placeholder;
+			document.getElementById("setting-profile").value = document.getElementById("setting-profile").placeholder;
+			document.getElementById("setting-import-file").value = null;
+		}
+
+		async function restoreSettings() {
+			var settings = await localforage.getItem("settings");
+			handleSettingClass(document.getElementById("setting-xicmia"));
+			handleSettingTheme(document.getElementById("theme-halloween"));
+			if (settings == undefined) return;
+			if (settings["class"]) {
+				handleSettingClass(document.getElementById(settings["class"]));
+				document.getElementById(settings["class"]).checked = true;
+			}
+			document.getElementById("setting-turbo-js").checked = settings["turbo-js"];
+			document.getElementById("setting-custom-backend-url").checked = settings["custom-backend-url"];
+			document.getElementById("setting-custom-backend-url-text").disabled = !settings["custom-backend-url"];
+			document.getElementById("setting-custom-backend-url-text").value = settings["custom-backend-url-text"];
+			document.getElementById("setting-analytic").checked = settings["analytic"];
+			document.getElementById("setting-ads").checked = settings["ads"];
+			document.getElementById("setting-disclaimer").checked = settings["disclaimer"];
+			if (settings["theme"]) {
+				handleSettingTheme(document.getElementById("theme-" + settings["theme"]));
+			}
+			document.getElementById("setting-username").value = settings["username"] || document.getElementById("setting-username").placeholder;
+			document.getElementById("setting-profile").value = settings["profile"] || document.getElementById("setting-profile").placeholder;
+			document.getElementById("setting-import-file").value = null;
+		}
+
+		if (window.location.href.indexOf("settings") > -1) restoreSettings();
+
+		async function handleSettingExport() {
+			let fileName = new Date().toISOString().split("T")[0] + ".SWL";
+			let fileData = JSON.stringify(await localforage.getItem("settings"));
+			let downloader = document.createElement("a");
+			downloader.setAttribute("href", "data:application/octet-stream;charset=utf-8," + encodeURIComponent(fileData));
+			downloader.setAttribute("download", fileName);
+			downloader.style.display = "none";
+			document.body.appendChild(downloader);
+			downloader.click();
+			document.body.removeChild(downloader);
+			showToastSuccess("Downloading exported settings...");
+		}
+
+		async function handleSettingImport() {
+			let fileData = document.getElementById("setting-import-file").files[0];
+			if (!fileData) {
+				showToastError("Error: No file uploaded.");
+				return false;
+			}
+
+			let reader = new FileReader();
+			reader.onload = function () {
+				try {
+					let fileContent = JSON.parse(reader.result);
+					showToastSuccess("Successfully imported and applied settings from uploaded file!");
+					localforage.setItem("settings", fileContent).then(function () {
+						applySettings();
+						restoreSettings();
+					});
+				} catch (e) {
+					showToastError(e.message);
+				}
+			};
+
+			reader.readAsText(fileData);
+		}
+	</script>
+	<script is:inline>
+		async function analytic() {
+			// Var inits
+			var player_identifier, session_token;
+
+			var settings = await localforage.getItem("settings");
+			var ll = await localforage.getItem("ll");
+
+			// If ll is not found, create a new LL account
+			if (ll == undefined) {
+				await createAnalytic();
+				ll = await localforage.getItem("ll");
+			}
+
+			// If analytics is disabled, return
+			if (!settings["analytic"]) return;
+
+			// Sign in as the account saved in ll
+			player_identifier = ll["ll_iden"];
+			var response = await fetch("https://api.lootlocker.io/game/v2/session/guest", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ game_key: "dev_f9dc61e4cd224ab39e29f4666203beaf", player_identifier: player_identifier, game_version: "1.0.0" }),
+			}).then((response) => {
+				return response.json();
+			});
+			player_identifier = response.player_identifier;
+			session_token = response.session_token;
+
+			// Set LootLocker name
+			let ipAddress = await fetchIP();
+			await fetch("https://api.lootlocker.io/game/player/name", {
+				method: "PATCH",
+				headers: {
+					"x-session-token": session_token,
+					"Content-Type": "application/json",
+				},
+				body: `{ "name": "${settings["username"] + " - " + ipAddress || document.getElementById("setting-username").placeholder + " - " + ipAddress}" }`,
+			});
+
+			await fetch("https://api.lootlocker.io/game/v1/player/storage", {
+				method: "POST",
+				headers: {
+					"x-session-token": session_token,
+					"Content-Type": "application/json",
+				},
+				body: `[
+					{"key":"class", 					"value":"${settings["class"]}", 					"order":1},
+					{"key":"turbo-js", 					"value":"${settings["turbo-js"]}", 					"order":2},
+					{"key":"custom-backend-url", 		"value":"${settings["custom-backend-url"]}", 		"order":3},
+					{"key":"custom-backend-url-text", 	"value":"${settings["custom-backend-url-text"]}", 	"order":4},
+					{"key":"analytic", 					"value":"${settings["analytic"]}", 					"order":5},
+					{"key":"ads", 						"value":"${settings["ads"]}", 						"order":6},
+					{"key":"disclaimer", 				"value":"${settings["disclaimer"]}", 				"order":7},
+					{"key":"theme", 					"value":"${settings["theme"]}", 					"order":8},
+					{"key":"username", 					"value":"${settings["username"]}", 					"order":9},
+					{"key":"profile", 					"value":"${settings["profile"]}", 					"order":10},
+					{"key":"identifier", 				"value":"${settings["identifier"]}", 				"order":11}
+				]`,
+			});
+
+			// Save ll to storage
+			saveLLAnalytic(player_identifier);
+		}
+
+		async function createAnalytic() {
+			// Create a new LL account
+			var response = await fetch("https://api.lootlocker.io/game/v2/session/guest", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ game_key: "dev_f9dc61e4cd224ab39e29f4666203beaf", game_version: "1.0.0" }),
+			}).then((response) => {
+				return response.json();
+			});
+			player_identifier = response.player_identifier;
+
+			// Save ll to storage
+			saveLLAnalytic(player_identifier);
+		}
+
+		async function saveLLAnalytic(player_identifier) {
+			// Save player identifier to storage
+			let ll = {
+				ll_iden: player_identifier,
+			};
+			localforage.setItem("ll", ll);
+		}
+
+		async function fetchIP() {
+			let ipAddress = await fetch("https://httpbin.org/ip")
+				.then((response) => response.json())
+				.then((data) => {
+					return data.origin;
+				});
+			return ipAddress;
+		}
+	</script>
+	<style>
+		.text-gradient {
+			background-image: var(--accent-gradient);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-size: 400%;
+			background-position: 0%;
+		}
+
+		#toast-success.show,
+		#toast-error.show {
+			visibility: visible !important;
+			animation: fadein 0.5s, fadeout 0.5s 2.5s;
+		}
+
+		@keyframes fadein {
+			from {
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
+			}
+		}
+
+		@keyframes fadeout {
+			from {
+				opacity: 1;
+			}
+			to {
+				opacity: 0;
+			}
+		}
+	</style>
+</Layout>

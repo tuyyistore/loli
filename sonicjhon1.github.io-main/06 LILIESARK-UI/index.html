@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+
+        <!-- Favicons -->
+		<link rel="icon" type="image/x-icon" href="./assets/favicons/favicon.ico">
+		<link rel="icon" type="image/png" sizes="16x16" href="./assets/favicons/favicon-16x16.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="./assets/favicons/favicon-32x32.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicons/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="192x192" href="./assets/favicons/android-chrome-192x192.png">
+		<link rel="icon" type="image/png" sizes="512x512" href="./assets/favicons/android-chrome-512x512.png">
+		<link rel="manifest" href="./assets/favicons/site.webmanifest">
+        <title>Lilies' Ark</title>
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap" rel="stylesheet"> 
+
+        <!-- CSS and JS -->
+        <link rel="stylesheet" type="text/css" href="./assets/css/styleAnimation.css">
+        <link rel="stylesheet" type="text/css" href="./assets/css/styleLaunch.css">
+        <link rel="stylesheet" type="text/css" href="./assets/css/styleSplash.css">
+        <link rel="stylesheet" type="text/css" href="./assets/css/styleMenu.css">
+        <link rel="stylesheet" type="text/css" href="./assets/css/styleLogin.css">
+        <link rel="stylesheet" type="text/css" href="./assets/css/styleLoading.css">
+        <link rel="stylesheet" type="text/css" href="./assets/css/styleTrailer.css">
+        <link rel="stylesheet" type="text/css" href="./assets/css/styleSetting.css">
+        <script type="text/javascript" src="./assets/js/howler.min.js"></script>
+        <script type="text/javascript" src="./assets/js/audio.js"></script>
+        <script type="text/javascript" src="./assets/js/util.js"></script>
+        <script type="text/javascript" src="./assets/js/custom.js"></script>
+        <script type="text/javascript" src="./assets/js/menu.js"></script>
+        <script type="text/javascript" src="./assets/js/loading.js"></script>
+        <script type="text/javascript" src="./assets/js/trailer.js"></script>
+        <script type="text/javascript" src="./assets/js/setting.js"></script>
+
+        <!-- Preloads -->
+        <link rel="preload" as="image" href="./assets/images/FanKit_001/gamelogo_003.png">
+        <link rel="preload" as="image" href="./assets/images/bg1.png">
+        <link rel="preload" as="image" href="./assets/images/bg2.webp">
+        <link rel="preload" as="image" href="./assets/images/bg3.png">
+        <link rel="preload" as="image" href="./assets/images/bg4.jpg">
+        <link rel="preload" as="image" href="./assets/images/splash/1.png">
+        <link rel="preload" as="image" href="./assets/images/splash/2.png">
+        <link rel="preload" as="image" href="./assets/images/splash/3.png">
+    </head>
+    <body>
+        <div id="app">
+            <div class="fadeIn" id="launch">
+                <div class="window">
+                    <div class="w-header">
+                        <div class="w-header-left">
+                            <h4 class="w-title">Ender Lilies</h4>
+                            <h5 class="w-subtitle">
+                                <a href="https://en.enderlilies.com/">Official Website</a>
+                            </h5>
+                        </div>
+                        <div class="w-header-right">
+                            <span class="dot color-3"></span>
+                            <span class="dot color-2"></span>
+                            <span class="dot color-1"></span>
+                        </div>
+                    </div>
+                    <div class="w-body">
+                        <a href="https://store.steampowered.com/app/1369630/ENDER_LILIES_Quietus_of_the_Knights/">
+                            <div class="w-body-ui"></div>
+                        </a>
+                        <div class="w-footer-ui">
+                            <div class="w-version">
+                                <h4>v1.0.0</h4>
+                                <h6>©BINARY HAZE INTERACTIVE Inc.</h6>
+                                <h6>Unreal Engine, Copyright 1998-2021, Epic Games Inc. All rights reserved.</h6>
+                            </div>
+                            <div class="w-button">
+                                <button class="w-launch-button" id="launch-button">Launch</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hide" id="splash">
+                <div class="splash-logo fadeOut hide" id="logo-1"></div>
+                <div class="splash-logo fadeOut hide" id="logo-2"></div>
+                <div class="splash-logo fadeOut hide" id="logo-3"></div>
+            </div>
+            <div class="fadeOut hide" id="menu">
+                <div class="m-header">
+                    <img class="m-logo" src="./assets/images/FanKit_001/gamelogo_003.png"></img>
+                </div>
+                <div class="m-body">
+                    <button class="m-button" id="button-1">Start</button>
+                    <button class="m-button" id="button-2">Settings</button>
+                    <button class="m-button" id="button-3">Quit</button>
+                </div>
+                <div class="m-footer">
+                    <h6>2021, BINARY HAZE Inc. All rights reserved.</h6>
+                    <h6>Unreal Engine, Copyright 1998-2021, Epic Games Inc. All rights reserved.</h6>
+                    <h6>Spine-Copyright (c) 2013-2021, Esoteric Software LLC | Made with FMOD Studio by Firelight Technologies Pty Ltd.</h6>
+                    <h6>The names of companies and products mentioned on this page are the trademarks or registered trademarks of their respective owners.</h6>
+                </div>
+            </div>
+            <div class="fadeOut hide" id="login">
+                <form class="l-modal-content">
+                    <div class="l-avatar-container">
+                        <img src="./assets/images/cover.png" alt="Avatar" class="l-avatar">
+                    </div>
+
+                    <div class="l-container">
+                        <label for="name"><b> Username </b></label>
+                        <input type="text" placeholder="Enter Username" name="name" id="name" required>
+
+                        <label for="password"><b> Password </b></label>
+                        <input type="password" placeholder="Enter Password" name="password" id="password" required>
+
+                        <button id="l-login-button" type="button"><strong> Login </strong></button>
+                    </div>
+                </form>
+            </div>
+            <div class="fadeOut hide" id="loading">
+                <div class="loader-text">
+                    <h1>Loading . . .</h1>
+                </div>
+                <div class="loader-container">
+                    <div class="loader-box">
+                        <div class="loader-line"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="fadeOut hide" id="trailer">
+                <video id="trailer-video" preload="auto" autoplay muted>
+                </video>
+            </div>
+            <div class="fadeOut hide" id="setting">
+                <div class="s-bg"></div>
+                <div class="s-body">
+                    <h1 class="s-title">GENERAL</h1>
+                    <div class="s-container">
+                        <h2 class="s-checkbox-label">Fullscreen</h2>
+                        <input class="s-checkbox" type="checkbox" id="Fullscreen" checked>
+                    </div>
+                    <div class="s-container">
+                        <h2 class="s-checkbox-label">Allow blank login</h2>
+                        <input class="s-checkbox" type="checkbox" id="BlankLogin">
+                    </div>
+                    <h1 class="s-title">AUDIO</h1>
+                    <div class="s-container">
+                        <h2 class="s-checkbox-label">Music</h2>
+                        <input class="s-checkbox" type="checkbox" id="Music" checked>
+                    </div>
+                    <div class="s-container">
+                        <h2 class="s-checkbox-label">SFX</h2>
+                        <input class="s-checkbox" type="checkbox" id="SFX" checked>
+                    </div>
+                    <button class="s-apply-button" id="s-apply-button">Apply and Restart</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

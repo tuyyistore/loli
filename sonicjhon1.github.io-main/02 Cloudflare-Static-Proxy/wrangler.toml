@@ -1,0 +1,11 @@
+name = "rest"
+type = "typescript"
+compatibility_date = "2022-09-28"
+
+account_id = ""
+workers_dev = true
+route = ""
+zone_id = ""
+
+[dev]
+port = 9000

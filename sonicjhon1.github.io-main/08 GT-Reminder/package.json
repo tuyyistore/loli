@@ -1,0 +1,21 @@
+{
+	"name": "sample-wrangler-template",
+	"version": "1.0.0",
+	"description": "A template for kick starting a Cloudflare Workers project",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"format": "prettier --write '**/*.{js,css,json,md}'"
+	},
+	"author": "Ben Chartrand <ben@spottersystems.com>",
+	"license": "MIT",
+	"devDependencies": {
+		"prettier": "3.0.2"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "npm run format",
+			"pre-push": "npm run format"
+		}
+	}
+}

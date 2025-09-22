@@ -1,0 +1,80 @@
+---
+import { getImage } from "astro:assets";
+import imageDefaultThumbnail from "../assets/003.png";
+
+import Layout from "../layouts/Layout.astro";
+
+const DEFAULT_THUMBNAIL_URL = (await getImage({src: imageDefaultThumbnail, format: "avif"})).src;
+---
+
+<head>
+	<meta name="turbo-visit-control" content="reload">
+</head>
+<Layout title="SWL - View Post">
+	<main class="m-auto max-h-[90vh] max-w-[100%] max-md:max-w-full">
+		<div data-service="mdxui" style="width: 100%; height: 90vh;">
+			<div data-placeholder data-visible class="flex-col">
+				<img class="w-[20%]" src="./404.jpg" />
+				<p>An error occoured while loading the data, please try reloading the page.</p>
+			</div>
+		</div>
+	</main>
+</Layout>
+<script is:inline data-turbo-eval="false" define:vars={{ DEFAULT_THUMBNAIL_URL }}>
+	(async () => {
+		var im = iframemanager();
+		var settings = await localforage.getItem("settings");
+
+		var backendURL = document.getElementById("backendURL").dataset.backendurl;
+		var theme = document.querySelector("body").dataset.theme;
+		if (settings != undefined) {
+			if (settings["custom-backend-url"] && settings["custom-backend-url-text"] && settings["custom-backend-url-text"] != "") {
+				backendURL = settings["custom-backend-url-text"];
+			}
+			if (settings["theme"] && settings["theme"] != "") {
+				theme = settings["theme"];
+			}
+		}
+
+		var classParam = new URL(window.location.href).searchParams.get("class");
+		var postParam = new URL(window.location.href).searchParams.get("post");
+		var postURL = backendURL + classParam + "/" + postParam;
+		var thumbURL = new URL(window.location.href).searchParams.get("t")
+			? backendURL + new URL(window.location.href).searchParams.get("t")
+			: DEFAULT_THUMBNAIL_URL;
+
+		im.run({
+			currLang: "en",
+			services: {
+				mdxui: {
+					embedUrl: postURL,
+
+					thumbnailUrl: thumbURL,
+
+					iframe: {
+						allow: "fullscreen;",
+						params: "theme=" + theme,
+					},
+
+					languages: {
+						en: {
+							notice: "Upon loading the content, this page will fetch a post from a seperate server that is controlled by the a group of writers. The writer is responsible for every infomation and data given in posts written by him/her.",
+							loadBtn: "Load it once",
+							loadAllBtn: "Load it and Don't ask again",
+						},
+					},
+				},
+			},
+		});
+
+		try {
+			document.querySelector("button.c-la-b").style.display = "none";
+		} catch (e) {
+			console.log("Can't find the button:", e, ". Probably already accepted.");
+		}
+
+		if (settings != null) {
+			settings["disclaimer"] === true ? im.acceptService("all") : im.rejectService("all");
+		}
+	})();
+</script>

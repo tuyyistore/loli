@@ -1,0 +1,24 @@
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+*/.DS_Store
+
+# Prisma stuff
+src/generated/
+
+# wwebjs stuff
+.wwebjs_auth/
+.wwebjs_cache/

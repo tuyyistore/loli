@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import HomeButton from '../components/HomeButton.astro';
+import CardWButton from '../components/CardWButton.astro';
+---
+<Layout title="Genshin Redeem Codes">
+	<Header>
+		<HomeButton slot="HomeButton"/>
+	</Header>
+	<main class="min-h-full z-10 relative max-w-3xl pt-20 m-auto p-6">
+		<h1 class="not-selectable text-center text-5xl font-Lato-900 py-6 m-0 drop-shadow-lg text-slate-900 dark:text-white">Genshin's <span class="text-transparent bg-clip-text bg-gradient-to-br from-sky-500 to-indigo-700">Redeem Codes!</span></h1>
+		<p class="bg-white rounded-lg p-4 mb-4 leading-relaxed border-solid border-2 border-sky-400 dark:border-violet-900 text-center" id="current-date">
+			To get started, simply tap on <code class="bg-indigo-700/90 font-mono text-purple-200 p-1.5 rounded">Redeem</code> on any of the code below.<br/>
+			<strong>Last updated on:</strong>
+		</p>
+		<ul role="list" class="link-card-grid">
+			<CardWButton/>
+			<CardWButton/>
+			<CardWButton/>
+		</ul>
+	</main>
+</Layout>
+
+<script>
+	async function fetchGRC() {
+		return (await fetch('https://genshin-redeem-code.sonicj.workers.dev/')).json();
+	}
+
+	document.addEventListener("DOMContentLoaded", async () => {
+		try {
+			// Disable all button with the id Redeem
+			document.querySelectorAll("button").forEach(async button => {
+				if(button.id == 'Redeem') button.disabled = true;
+			});
+
+			const response = await fetchGRC();
+			const responseLength = await response.codes.length;
+			for (let i=0; i < responseLength ; i++) {
+				const code = response.codes[i].match(/=(.+)/)[1];
+				const link = response.codes[i];
+				const reward = response.rewards[i];
+
+				// Set redeem code
+				let h2 = document.querySelectorAll("#Title");
+				h2[i].textContent = code;
+
+				// Set redeem reward
+				let p = document.querySelectorAll("#Desc");
+				p[i].textContent = reward;
+
+				// Set button callback
+				let button = document.querySelectorAll("#Redeem");
+				button[i].addEventListener('click', function() {window.location = link})
+			}
+		} catch (e) {
+			console.log(e);
+		}
+
+		// Get all loading element, remove the loading class
+		document.querySelectorAll(".loading").forEach(async element => {
+			await new Promise(r => setTimeout(r, 500));
+			element.classList.replace("loading", "loaded");
+		})
+
+		// Get all disabled button, enable them
+		document.querySelectorAll("button").forEach(async button => {
+			await new Promise(r => setTimeout(r, 2000));
+			button.disabled = false;
+		})
+
+		// Get p, assign current date
+		document.querySelector("#current-date").innerHTML += new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) + " &nbsp(" + new Date().toLocaleTimeString() + ")";
+	});
+</script>
+
+<style>
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		gap: 1rem;
+		padding: 0;
+	}
+</style>

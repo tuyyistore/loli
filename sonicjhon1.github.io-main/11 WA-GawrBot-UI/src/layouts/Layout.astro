@@ -1,0 +1,92 @@
+---
+import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
+import TauriScripts from "../components/utils/TauriScripts.astro";
+import Scripts from "../components/utils/Scripts.astro";
+
+export interface Props {
+	title: string;
+}
+const { title } = Astro.props;
+
+const metaTitle = "Gawr Bot";
+const metaThumbnail = "./thumb.png";
+const metaDescription = "WA-GawrBot-UI is an UI that allows you to interact with the Gawr Bot backend to receive and send messages via WA and a bunch of other things.";
+const metaUrl = import.meta.env.SITE + import.meta.env.BASE_URL;
+---
+
+<html lang="en" data-theme="forest">
+	<head>
+		<meta charset="utf-8" />
+		<title>{title}</title>
+		<meta itemprop="name" content={metaTitle} />
+		<meta itemprop="url" content={metaThumbnail} />
+		<meta name="title" content={metaTitle} />
+		<meta name="description" content={metaDescription} />
+		<meta itemprop="description" content={metaDescription} />
+		<meta itemprop="image" content={metaThumbnail} />
+		<meta name="image" content={metaThumbnail} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={metaUrl} />
+		<meta property="og:title" content={metaTitle} />
+		<meta property="og:description" content={metaDescription} />
+		<meta property="og:image" content={metaThumbnail} />
+		<meta property="og:image:secure_url" itemprop="image" content={metaThumbnail} />
+		<meta property="og:image:type" content="image/png" />
+		<meta property="og:image:width" content="300" />
+		<meta property="og:image:height" content="200" />
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={metaUrl} />
+		<meta property="twitter:title" content={metaTitle} />
+		<meta property="twitter:description" content={metaDescription} />
+		<meta property="twitter:image" content={metaThumbnail} />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="theme-color" content="black" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png" />
+		<link rel="manifest" href="./site.webmanifest" />
+		<Scripts />
+		<TauriScripts />
+		<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" />
+	</head>
+	<slot />
+	<style is:global>
+		.overflow-scroll::-webkit-scrollbar-corner {
+			background: rgba(0, 0, 0, 0);
+		}
+
+		*.overflow-scroll {
+			scrollbar-width: thin;
+			scrollbar-color: hsl(var(--nc)) hsl(var(--b3));
+			transition: all;
+			transition-duration: 250ms;
+		}
+
+		*.overflow-scroll:hover {
+			scrollbar-color: hsl(var(--pc)) hsl(var(--b3));
+		}
+
+		/* Works on Chrome, Edge, and Safari */
+		*.overflow-scroll::-webkit-scrollbar {
+			width: 5px;
+			height: 5px;
+		}
+
+		*.overflow-scroll::-webkit-scrollbar-track {
+			background: hsl(var(--b3));
+		}
+
+		*.overflow-scroll::-webkit-scrollbar-thumb {
+			background-color: hsl(var(--nc));
+			border-radius: 20px;
+			border: 2px solid hsl(var(--nc));
+		}
+	</style>
+
+	<style is:global>
+		.forceFlex {
+			display: flex !important;
+		}
+	</style>
+</html>

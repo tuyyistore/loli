@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator kysely {
+  provider = "prisma-kysely"
+  output   = "../src/generated/kysely"
+  fileName = "types.ts"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = ""
+}
+
+model Session {
+  id      String    @id @unique
+  chats   Chat[]
+  Message Message[]
+}
+
+model Chat {
+  session              Session   @relation(fields: [sessionId], references: [id])
+  sessionId            String
+  chatName             String?
+  chatPhone            String    @unique
+  chatProfile          String?
+  chatIsArchived       Boolean
+  chatIsPinned         Boolean
+  chatMessages         Message[]
+  chatMessageLatest    Json?
+  chatMessageTimestamp Int?
+}
+
+model Message {
+  session          Session @relation(fields: [sessionId], references: [id])
+  sessionId        String
+  chat             Chat    @relation(fields: [messageChat], references: [chatPhone])
+  messageChat      String
+  messageAuthor    String
+  messageName      String
+  messageHasMedia  Boolean
+  messageBody      String
+  messageCaption   String?
+  messageType      String
+  messageTimestamp Int
+  messageFromMe    Boolean
+  messageObject    Json    @unique
+}

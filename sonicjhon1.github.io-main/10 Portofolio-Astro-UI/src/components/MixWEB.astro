@@ -1,0 +1,17 @@
+---
+export interface Props {
+	href: string;
+	caption: string;
+}
+
+const { href, caption } = Astro.props;
+---
+
+<li class="mix webdesign col-xl-3 col-lg-4 col-md-6">
+	<a
+		title="click to zoom-in"
+		href=`https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/.thumbs/${href}.webp`
+		data-caption={caption}
+	>
+	</a>
+</li>

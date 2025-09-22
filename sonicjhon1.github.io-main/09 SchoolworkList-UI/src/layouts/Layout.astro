@@ -1,0 +1,229 @@
+---
+import { Image } from "astro:assets";
+import imageGithubSonicj from "../assets/sonicjhon1.png";
+import imageDefaultProfile from "../assets/default_profile.png";
+
+import IconGithub from "../components/icons/IconGithub.astro";
+import IconInstagram from "../components/icons/IconInstagram.astro";
+import IconYoutube from "../components/icons/IconYoutube.astro";
+
+export interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+const metaTitle = "SWL - SchoolWork Lists";
+const metaThumbnail =
+	"https://api.apiflash.com/v1/urltoimage?access_key=79b0e7c367b84a8387c8041566437096&url=https%3A%2F%2Fsonicj.pages.dev%2F09%2520SchoolworkList-UI%2F&format=jpeg&quality=60&response_type=image&thumbnail_width=800";
+const metaDescription = "Track all of your school's homework with this website, free and open-source!";
+const metaUrl = "https://sonicj.pages.dev/09%20SchoolworkList-UI/";
+const backendURL = "https://schoolworklist.pages.dev/";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>{title}</title>
+		<meta charset="utf-8" />
+		<meta itemprop="name" content={metaTitle} />
+		<meta itemprop="url" content={metaThumbnail} />
+		<meta name="title" content={metaTitle} />
+		<meta name="description" content={metaDescription} />
+		<meta itemprop="description" content={metaDescription} />
+		<meta itemprop="image" content={metaThumbnail} />
+		<meta name="image" content={metaThumbnail} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={metaUrl} />
+		<meta property="og:title" content={metaTitle} />
+		<meta property="og:description" content={metaDescription} />
+		<meta property="og:image" content={metaThumbnail} />
+		<meta property="og:image:secure_url" itemprop="image" content={metaThumbnail} />
+		<meta property="og:image:type" content="image/jpg" />
+		<meta property="og:image:width" content="300" />
+		<meta property="og:image:height" content="200" />
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={metaUrl} />
+		<meta property="twitter:title" content={metaTitle} />
+		<meta property="twitter:description" content={metaDescription} />
+		<meta property="twitter:image" content={metaThumbnail} />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="theme-color" content="black" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+		<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png" />
+		<link rel="manifest" href="./site.webmanifest" />
+		<script src="./turbo.js" defer></script>
+		<script src="./iframemanager.js" is:raw></script>
+		<link rel="stylesheet" href="./iframemanager.css" />
+		<script src="./localforage.min.js" is:raw></script>
+	</head>
+	<body class="transition-colors duration-200 ease-in-out" data-theme="halloween" id="body" data-turbo-permanent>
+		<script is:inline>
+			// Bootstrap to fix flashbangs
+			var settings = localforage.getItem("settings").then(() => {
+				if (settings == undefined) return;
+				document.querySelector("body").dataset.theme = settings["theme"] || "halloween";
+			});
+		</script>
+		<link id="backendURL" data-backendurl={backendURL} />
+		<div class="navbar bg-base-100">
+			<div class="flex-1">
+				<a href={import.meta.env.PUBLIC_URL ? import.meta.env.PUBLIC_URL + "/index.html" : "index"} class="btn btn-ghost text-xl normal-case" data-turbo-preload
+					>SWL<span class="mt-1 text-xs max-sm:hidden">&nbsp&nbsp&nbsp(SchoolWork Lists)</span></a
+				>
+			</div>
+			<div class="flex-none gap-2">
+				<div class="form-control">
+					<input
+						id="searchbox"
+						type="text"
+						placeholder="Search"
+						class="input input-bordered focus:border-base-content focus:bg-base-200 transition-all duration-700 ease-in-out focus:outline-none"
+						onkeyup="handleSearch(event.key)"
+					/>
+				</div>
+				<div class="dropdown dropdown-end">
+					<label tabindex="0" class="btn btn-ghost btn-circle avatar">
+						<div class="w-10 rounded-full">
+							<Image class="h-full rounded-full" src={imageDefaultProfile} id="profile-picture" alt="Profile" format="avif" width="64" height="64"/>
+						</div>
+					</label>
+					<ul tabindex="0" class="menu menu-compact dropdown-content bg-base-100 rounded-box border-primary/10 mt-3 w-52 border border-solid p-2 shadow">
+						<li id="username" class="break-all px-4 py-2 font-bold">Anonymous</li>
+						<hr class="bg-secondary/80 mb-2 h-[2px] max-h-[1px] w-full border-0" />
+						<li><a href="./settings">Settings</a></li>
+						<li><a href="./about">About</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<slot />
+	</body>
+	<footer class="footer bg-neutral text-neutral-content absolute items-center p-4">
+		<div class="grid-flow-col items-center">
+			<a href="https://github.com/sonicjhon1" class="h-8 shadow-lg transition-all duration-500 ease-in-out hover:brightness-150">
+				<Image class="h-full w-[32px] rounded-full" src={imageGithubSonicj} id="github-profile" alt="sonicjhon1" format="avif" width="64" height="64"/>
+			</a>
+			<p class="select-none">Copyright &copy; 2023 - All right reserved</p>
+		</div>
+		<div class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+			<a href="https://github.com/sonicjhon1/sonicjhon1.github.io" class="h-5 transition-all duration-500 ease-in-out hover:brightness-200" title="Check out the monorepo on Github"><IconGithub /></a>
+			<a href="https://www.instagram.com/sonicjhon1" class="h-5 transition-all duration-500 ease-in-out hover:brightness-200" title="Check me out on Instagram"><IconInstagram /></a>
+			<a href="https://www.youtube.com/@sonicjhon1" class="h-5 transition-all duration-500 ease-in-out hover:brightness-200" title="Check out my Youtube channel"><IconYoutube /></a>
+		</div>
+	</footer>
+	<script>
+		if ("serviceWorker" in navigator) {
+			window.addEventListener("load", () => {
+				navigator.serviceWorker.register("./swl-service-worker.js").then((sw) => {
+					console.log(sw);
+				});
+			});
+		}
+	</script>
+	<script is:inline>
+		async function applySettings() {
+			var settings = await localforage.getItem("settings");
+			if (settings == undefined) return;
+
+			// General
+			if (settings["turbo-js"] != undefined && typeof settings["turbo-js"] === "boolean") {
+				Turbo.session.drive = settings["turbo-js"];
+			}
+			if (settings["analytic"] != undefined && typeof settings["analytic"] === "boolean" && settings["analytic"] === true) {
+				// TODO: Implement this after adding Lootlocker
+			}
+
+			// Personalization
+			if (settings["theme"] != undefined && settings["theme"] != "") {
+				document.querySelector("body").dataset.theme = settings["theme"];
+			}
+			if (settings["username"] != undefined && settings["username"] != "") {
+				document.getElementById("username").innerHTML = settings["username"];
+			}
+			if (settings["profile"] != undefined && settings["profile"] != "") {
+				document.getElementById("profile-picture").src = settings["profile"];
+			}
+		}
+
+		addEventListener("turbo:load", applySettings, { once: true });
+	</script>
+	<script>
+		const githubProfiles = document.querySelectorAll("#github-profile");
+		githubProfiles.forEach((profile) => {
+			let username = profile.getAttribute("alt");
+			if (!username) return;
+			switch (username) {
+				case "sonicjhon1":
+					break;
+				default:
+					fetch(`https://api.github.com/users/${username}`).then((response) =>
+						response.json().then((data) => {
+							profile.setAttribute("src", data.avatar_url);
+						})
+					);
+			}
+		});
+	</script>
+	<script is:inline>
+		var currentVersion = Math.floor(Date.now() / 1000);
+		async function startCheckUpdate() {
+			setInterval(checkUpdates, 1000 * 60);
+		}
+		async function checkUpdates() {
+			try {
+				const response = await fetch("version");
+				const responseText = await response.text();
+				let latestVersion = parseInt(responseText.match("version: ([0-9]*)")[1]);
+				if (currentVersion < latestVersion) {
+					window.location.reload();
+					currentVersion = latestVersion;
+				}
+			} catch (err) {
+				console.warn("Something went wrong when fetching the version data needed.", err);
+			}
+		}
+
+		if (window.location.href.indexOf("localhost") != -1 || window.location.href.indexOf(":3005") != -1) {
+			console.log("Development mode detected, fetching the version is not needed.");
+		} else {
+			addEventListener("turbo:load", startCheckUpdate, { once: true });
+		}
+	</script>
+	<script is:inline>
+		async function handleSearch(key) {
+			let seachbox = document.getElementById("searchbox");
+			if (key == "Enter") {
+				if (window.location.href.indexOf("localhost") != -1 || window.location.href.indexOf(":3005") != -1) {
+					if (seachbox.value == "") {
+						Turbo.visit("index.html");
+					} else {
+						Turbo.visit("index.html?s=" + seachbox.value);
+					}
+				} else {
+					if (seachbox.value == "") {
+						Turbo.visit("index");
+					} else {
+						Turbo.visit("index?s=" + seachbox.value);
+					}
+				}
+			} else {
+				liveSearch();
+			}
+		}
+	</script>
+	<style is:global>
+		:root {
+			--accent: 124, 58, 237;
+			--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
+		}
+		html {
+			font-family: "Rubik", sans-serif;
+			background-color: #f6f6f6;
+		}
+	</style>
+</html>

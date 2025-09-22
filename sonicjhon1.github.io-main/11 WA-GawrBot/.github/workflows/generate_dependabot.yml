@@ -1,0 +1,25 @@
+name: Generate dependabot.yml
+
+on:
+  push:
+    branches:
+      - 'main'
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      
+      - uses: actions/checkout@v3
+        
+      - name: Generate dependabot.yml
+        uses: Makeshift/generate-dependabot-glob-action@master
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "[WF] Update dependabot YAML [CF-Pages-Skip]"
+          title: "WF - Update Dependabot YAML"
+          body: "A new directory for dependency has been detected, requesting an update to Dependabot's YAML file."
+          labels: "dependencies"

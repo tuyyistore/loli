@@ -1,0 +1,37 @@
+{
+	"name": "@sonicjhon1/sonicj-wa-gawr-bot",
+	"version": "0.1.0",
+	"scripts": {
+		"dev": "pnpm dbbuild && node --max-http-header-size=900000000 -r ts-node/register ./index.ts",
+		"dbbuild": "pnpm format && pnpm generate",
+		"reset": "pnpm dlx prisma migrate reset",
+		"format": "pnpm dlx prisma format",
+		"migrate": "pnpm dlx prisma migrate dev --name init",
+		"generate": "pnpm dlx prisma generate",
+		"preinstall": "npx only-allow pnpm"
+	},
+	"dependencies": {
+		"archiver": "^6.0.0",
+		"dotenv": "^16.3.1",
+		"kysely": "^0.26.1",
+		"kysely-surrealdb": "^0.7.4",
+		"node-fetch": "^3.3.2",
+		"prisma-kysely": "^1.6.0",
+		"sharp": "0.32.5",
+		"socket.io": "4.7.2",
+		"surrealdb.js": "^0.7.3",
+		"whatsapp-web.js": "^1.22.1"
+	},
+	"devDependencies": {
+		"@types/archiver": "^5.3.2",
+		"@types/node-fetch": "^2.6.4",
+		"@types/ws": "8.5.5",
+		"prisma": "5.2.0",
+		"ts-node": "10.9.1",
+		"typescript": "5.1.6"
+	},
+	"optionalDependencies": {
+		"bufferutil": "4.0.7",
+		"utf-8-validate": "5.0.10"
+	}
+}

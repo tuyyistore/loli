@@ -1,0 +1,117 @@
+---
+import Song from "./Song.astro";
+---
+
+<main class="font-700">
+    <div style="display: flex; flex-direction: column;">
+        <div class="header">
+            <a href="./songs">
+                <div class="title underline">Songs</div>
+                <div class="see-all font-400">SEE ALL</div>
+            </a>
+            <section id="songs">
+                <Song songArtist="鹿乃" songLink="TEpo9vQkGKs" songTitle="ハロ/ハワユ" songThumbnail="PLtFfqgEJBeWnmOBpXbmWGnhk3gkdwoI0wid0aRTbGY6MNcTYVdOFF7vET7nLD5WEofxBlk0OTRpSii9"/>
+                <Song songArtist="Kano" songLink="8TqbkDpqtD4" songTitle="Nadamesukashi Negotiation" songThumbnail="RfAkV--EzeI7PBt4nf9XHFj-JmgB9gx9iVFiW7z3cE7bSuVpRRIqNZ436wN41pxaqP-B5BBtQ79Zxhx_"/>
+                <Song songArtist="鹿乃" songLink="vTFqA9J6mDY" songTitle="世界で一番近くに居るのに" songThumbnail="6KZHpeGw60PxaVLgrWQWO1RThm_TQ_Bse7KFTTS-6JPYEfMyWyocRc6N0pRQIPxazsl4wtVg7wfUdBH1"/>
+                <Song songArtist="鹿乃" songLink="Hyb6983h9Wo" songTitle="さよなら、アダムとイヴ" songThumbnail="PLtFfqgEJBeWnmOBpXbmWGnhk3gkdwoI0wid0aRTbGY6MNcTYVdOFF7vET7nLD5WEofxBlk0OTRpSii9"/>
+                <Song songArtist="鹿乃" songLink="X2Bb3BJJpmA" songTitle="春に落ちて" songThumbnail="PLtFfqgEJBeWnmOBpXbmWGnhk3gkdwoI0wid0aRTbGY6MNcTYVdOFF7vET7nLD5WEofxBlk0OTRpSii9"/>
+            </section>
+        </div>
+        <div class="header">
+            <div class="title underline">Albums</div>
+            <section id="albums">
+
+            </section>
+        </div>
+        <div class="header">
+            <a href="./songs">
+                <div class="title underline">Singles</div>
+                <div class="see-all font-400">SEE ALL</div>
+            </a>
+            <section id="singles">
+
+            </section>
+        </div>
+    </div>
+</main>
+
+<style>
+    main {
+        padding-left: 2rem;
+        margin-top: 3rem;
+        position: absolute;
+        z-index: 10;
+        overflow-x: hidden;
+        overflow-y: visible;
+    }
+
+    @media screen and (max-width: 300px) {
+        main {
+            padding-left: 2rem;
+        }
+    }
+
+    @media screen and (min-width:381px) and (max-width: 800px) {
+        main {
+            padding-left: 2rem;
+        }
+    }
+
+    @media screen and (min-width:801px) {
+        main {
+            padding-left: 7rem;
+        }
+    }
+
+    .header {
+        margin-top: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    a, a:visited {
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    .underline {
+        text-decoration: underline;
+    }
+
+    .title {
+        font-size: 2.5rem;
+        display: inline-block;
+        letter-spacing: -.02em;
+        text-shadow: rgba(0,0,0,.171) .2rem -.12rem .5rem;
+    }
+
+    @media (min-width: 320px) and (max-width: 640px) {
+        .title {
+            font-size: 2rem;
+        }
+	}
+    @media screen and (min-width: 641px) and (max-width: 839px) {
+        .title {
+            font-size: 2.5rem;
+        }
+    }
+    @media screen and (min-width: 840px) {
+        .title {
+            font-size: 3.5rem;
+        }
+    }
+
+    .see-all {
+        font-size: smaller;
+        color: gray;
+    }
+
+    section {
+        width: calc(100vw - 14rem);
+    }
+
+    @media screen and (max-width: 800px) {
+        section {
+            width: calc(100vw - 3rem);
+        }
+    }
+</style>

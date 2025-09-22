@@ -1,0 +1,34 @@
+---
+import { getCollection } from "astro:content";
+import moment from "moment";
+
+// Get all entries from a collection. Requires the name of the collection as an argument.
+const exampleEntries = await getCollection("example");
+const xicmiaEntries = await getCollection("xicmia");
+---
+{
+	exampleEntries.map((exampleEntry) => (
+        <div id="exampleEntry">
+            <div id="judul">{exampleEntry.data.judul}</div>
+            <div id="tanggal">{moment(exampleEntry.data.tanggalKasih).format("ddd, DD MMM YYYY")}</div>
+            <div id="tanggalKumpul">{moment(exampleEntry.data.tanggalKumpul).format("ddd, DD MMM YYYY")}</div>
+            <div id="mataPelajaran">{exampleEntry.data.mataPelajaran}</div>
+            <div id="dalam">{exampleEntry.data.dalam}</div>
+            <div id="slug">{exampleEntry.slug}</div>
+            <div id="thumbnail">{exampleEntry.data.thumbnail}</div>
+        </div>
+	))
+}
+{
+	xicmiaEntries.map((xicmiaEntry) => (
+        <div id="xicmiaEntry">
+            <div id="judul">{xicmiaEntry.data.judul}</div>
+            <div id="tanggal">{moment(xicmiaEntry.data.tanggalKasih).format("ddd, DD MMM YYYY")}</div>
+            <div id="tanggalKumpul">{moment(xicmiaEntry.data.tanggalKumpul).format("ddd, DD MMM YYYY")}</div>
+            <div id="mataPelajaran">{xicmiaEntry.data.mataPelajaran}</div>
+            <div id="dalam">{xicmiaEntry.data.dalam}</div>
+            <div id="slug">{xicmiaEntry.slug}</div>
+            <div id="thumbnail">{xicmiaEntry.data.thumbnail}</div>
+        </div>
+	))
+}

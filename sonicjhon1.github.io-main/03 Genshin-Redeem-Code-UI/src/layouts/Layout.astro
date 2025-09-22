@@ -1,0 +1,225 @@
+---
+export interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+import Core from '../components/Core.astro';
+import Footer from '../components/Footer.astro';
+import '../components/Fonts.astro';
+---
+<!DOCTYPE html>
+<html lang="en" class="font-Lato-400 dark h-full bg-slate-100 dark:bg-black">
+	<head>
+		<title>{title}</title>
+		<meta name="description" content="A website to make redeeming latest, up-to-date Genshin Impact codes easier!">
+  		<meta name="keywords" content="Sonicj, Sonicjhon, Sonicjhon1, Sonicjhon56, Sonicjs Home, home, js, html, css, astro, genshin, genshin impact, yuanshen, yuan shen, anime game, genshin impact redeem codes, redeem code, redeem codes">
+  		<meta name="author" content="Sonicjhon1">
+  		<meta property="og:title" content="Genshin Impact Redeem Codes">
+  		<meta property="og:description" content="A website to get the latest, up-to-date Genshin Impact redeem codes!">
+  		<meta property="og:image" content="https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/03%20Genshin-Redeem-Code-UI/public/thumb.webp">
+  		<meta property="og:image:secure_url" itemprop="image" content="https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/03%20Genshin-Redeem-Code-UI/public/thumb.webp">
+  		<meta property="og:image:type" content="image/webp">
+  		<meta property="og:image:width" content="300">
+  		<meta property="og:image:height" content="200">
+  		<meta property="og:type" content="website">
+  		<meta name="twitter:site" content="Genshin Impact Redeem Codes">
+  		<meta name="twitter:title" content="Genshin Impact Redeem Codes">
+  		<meta name="twitter:description" content="A website to get the latest, up-to-date Genshin Impact redeem codes!">
+  		<meta name="twitter:card" content="summary_large_image">
+  		<meta name="twitter:image:src" content="https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/03%20Genshin-Redeem-Code-UI/public/thumb.webp">
+  		<meta name="theme-color" content="#251B37">
+  		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+  		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="generator" content={Astro.generator} />
+		<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+		<link rel="manifest" href="./favicon/site.webmanifest">
+		<Core/>
+	</head>
+	<body class="h-full m-0">
+		<link itemprop="thumbnailUrl" href="https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/03%20Genshin-Redeem-Code-UI/public/thumb.webp"> 
+		<span itemprop="thumbnail" itemscope itemtype="image/webp"> 
+		  <link itemprop="url" href="https://raw.githubusercontent.com/sonicjhon1/sonicjhon1.github.io/main/03%20Genshin-Redeem-Code-UI/public/thumb.webp"> 
+		</span>
+		<div class="z-0 fixed" id="particles-js"></div>
+		<div class="mouse" id="mouse"></div>
+		<slot />
+		<Footer/>
+	</body>
+</html>
+
+<script is:inline>
+	particlesJS("particles-js", {
+	particles: {
+	number: { value: 160, density: { enable: true, value_area: 800 } },
+	color: { value: "#808080" },
+	shape: {
+	  type: "circle",
+	  stroke: { width: 0, color: "#000000" },
+	  polygon: { nb_sides: 5 },
+	  image: { src: "img/github.svg", width: 100, height: 100 },
+	},
+	opacity: {
+	  value: 1,
+	  random: true,
+	  anim: { enable: true, speed: 1, opacity_min: 0, sync: false },
+	},
+	size: {
+	  value: 3,
+	  random: true,
+	  anim: { enable: false, speed: 4, size_min: 0.3, sync: false },
+	},
+	line_linked: {
+	  enable: false,
+	  distance: 150,
+	  color: "#ffffff",
+	  opacity: 0.4,
+	  width: 1,
+	},
+	move: {
+	  enable: true,
+	  speed: 1,
+	  direction: "none",
+	  random: true,
+	  straight: false,
+	  out_mode: "out",
+	  bounce: false,
+	  attract: { enable: false, rotateX: 600, rotateY: 600 },
+	},
+	},
+	interactivity: {
+	detect_on: "window",
+	events: {
+	  onhover: { enable: true, mode: "bubble" },
+	  onclick: { enable: true, mode: "repulse" },
+	  resize: true,
+	},
+	modes: {
+	  grab: { distance: 400, line_linked: { opacity: 1 } },
+	  bubble: { distance: 250, size: 0, duration: 2, opacity: 0, speed: 3 },
+	  repulse: { distance: 400, duration: 0.4 },
+	  push: { particles_nb: 4 },
+	  remove: { particles_nb: 2 },
+	},
+	},
+	retina_detect: true,
+	});
+	update = async function () {
+	requestAnimationFrame(update);
+	};
+	requestAnimationFrame(update);
+</script>
+
+<style>
+	div#particles-js {
+		margin: 0;
+		top: 0;
+  		left: 0; 
+  		right: 0;
+  		bottom: 0;
+		min-height: 100%;
+		height: 100%;
+		width: 100%;
+	}
+</style>
+
+<style is:global>
+	.not-selectable {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+	div.mouse {
+		position: absolute;
+		width: 2rem;
+		height: 2rem;
+		border-radius: 50%;
+		border: 3px solid #0ea5e9;
+		z-index: 40;
+		pointer-events: none;
+		transition: all 200ms ease-out;
+		transition-property: top, left;
+		transform-origin: 50% 50%;
+		translate: -50% -50%;
+		animation: pulse 0.75s infinite alternate;
+	}
+
+	div.mouse::before {
+		content: "";
+		position: absolute;
+		width: 2rem;
+		height: 2rem;
+		border-radius: 50%;
+		border: 20px solid rgba(190, 190, 190, 0.201);
+		z-index: 30;
+		pointer-events: none;
+		transform-origin: 50% 50%;
+		translate: -17.5% -17.5%;
+		animation: pulse 2.5s infinite alternate;
+	}
+
+	div.mouse::after {
+		content: "";
+		position: absolute;
+		width: 0.15rem;
+		height: 0.15rem;
+		border-radius: 50%;
+		border: 2px solid #1696d1;
+		z-index: 30;
+		pointer-events: none;
+		transform-origin: 50% 50%;
+		translate: 275% 275%;
+		animation: pulse 5s infinite alternate;
+	}
+
+	div.mouse#mouse.mouseClick {
+		border: 3px solid rgb(255, 255, 255);
+		animation: mouseClick 0.75s forwards;
+	}
+
+	div.mouse#mouse.mouseFadeIn {
+		animation: fadeIn 0.25s forwards;
+	}
+
+	@keyframes pulse {
+    	from {
+    	    transform: scale(1);
+    	}
+    	to {
+    	    transform: scale(.7);
+    	}
+	}
+
+	@keyframes mouseClick {
+    	0% {
+    	    transform: scale(1);
+    	}
+    	50% {
+    	    transform: scale(2);
+    	}
+    	100% {
+    	    transform: scale(1);
+    	    opacity: 0;
+    	}
+	}
+
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+
+	/* Workaround a bug in Astro that prevents the body's background colour being changed. */
+	html.dark {
+		background-color: #0f172a;
+	}
+</style>

@@ -1,0 +1,199 @@
+---
+import { getImage } from "astro:assets";
+import imageDefaultThumbnail from "../assets/003.png";
+
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+
+const DEFAULT_THUMBNAIL_URL = await getImage({src: imageDefaultThumbnail, format: "avif"});
+---
+
+<Layout title="SWL - Home">
+	<main class="m-auto min-h-[96vh] max-w-[80%] p-6 max-md:max-w-full">
+		<h1 class="prose-2xl font-bold">Kelas <span id="class" class="text-gradient"></span></h1>
+		<p class="instructions prose mb-4">
+			Simply tap on any post to view the details~<br />
+			<strong>TIP:&nbsp;</strong>You can personalize this website by going into the settings page!
+		</p>
+		<div id="card-list" class="link-card-grid">
+			<div id="card-template" class="hidden">
+				<Card title="{title}" href="{href}" tag="{tag}" body="{body}" image={DEFAULT_THUMBNAIL_URL.src} width={DEFAULT_THUMBNAIL_URL.attributes.width} height={DEFAULT_THUMBNAIL_URL.attributes.height}/>
+				<Card
+					title="Tugas Proposal"
+					href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+					tag="B.INDO"
+					body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet pretium nibh interdum luctus. Suspendisse eu purus purus."
+					image={DEFAULT_THUMBNAIL_URL.src}
+				/>
+			</div>
+		</ul>
+	</main>
+</Layout>
+<script is:inline define:vars={{ DEFAULT_THUMBNAIL_URL }}>
+	async function hrefQuerySearch() {
+		// Check for the s parameter inside of the href
+		let searchQuery = new URL(window.location.href).searchParams.get("s");
+		if (!searchQuery || searchQuery == '""' || searchQuery == "''") {
+			return;
+		} else {
+			liveSearch(searchQuery);
+		}
+	}
+
+	async function init() {
+		// Quick check if the Card List element is null, then just return
+		if (!document.querySelector("#card-list")) return;
+
+		var settings = await localforage.getItem("settings");
+		if (settings != undefined && settings["class"] != undefined && settings["class"] != "") {
+			let kelas = settings["class"].slice(8).toUpperCase();
+			kelas = kelas.replace("IIS", " IIS");
+			kelas = kelas.replace("MIA", " MIA");
+			kelas = kelas.replace("A ", "-A ");
+			kelas = kelas.replace("B ", "-B ");
+			kelas = kelas.replace("C ", "-C ");
+			kelas = kelas.replace("D ", "-D ");
+			kelas = kelas.replace("E ", "-E ");
+			kelas = kelas.replace("F ", "-F ");
+			document.getElementById("class").innerText = kelas;
+		} else {
+			document.getElementById("class").innerText = "XI-C MIA";
+		}
+
+		// Fetch work lists from Backend
+		var backendURL = document.getElementById("backendURL").dataset.backendurl + "query";
+		var settings = await localforage.getItem("settings");
+		if (settings != undefined && settings["custom-backend-url"] && settings["custom-backend-url-text"] != undefined && settings["custom-backend-url-text"] != "") {
+			backendURL = settings["custom-backend-url-text"] + "query";
+		}
+
+		var responseHTML = document.createElement("doc");
+		async function fetchData() {
+			try {
+				const response = await fetch(backendURL);
+				const html = await response.text();
+				responseHTML.innerHTML = html;
+			} catch (err) {
+				console.warn("Something went wrong when fetching the data needed.", err);
+			}
+		}
+
+		var cardClass = "xicmia";
+		var settings = await localforage.getItem("settings");
+		if (settings != undefined && settings["class"] != undefined && settings["class"] != "") {
+			cardClass = settings["class"].slice(8);
+		}
+
+		// Classwork Entries
+		async function generateCards() {
+			document.querySelectorAll("#work-card").forEach((cardElement) => {
+				cardElement.remove();
+			});
+
+			// Cards variables
+			let cardList = document.querySelector("#card-list");
+			let cardTemplates = cardList.querySelector("#card-template");
+			var currentClassEntry = "#" + cardClass + "Entry";
+			var classWorks = responseHTML.querySelectorAll(currentClassEntry);
+			classWorks.forEach((classWork) => {
+				var cardTemplate = cardTemplates.children[0].outerHTML;
+
+				let postSlugParam = "post?post=" + classWork.querySelector("#slug").innerHTML;
+				let cardClassParam = "class=" + cardClass;
+				var href = postSlugParam + "&" + cardClassParam;
+
+				var thumbnailURL = DEFAULT_THUMBNAIL_URL.src;
+				// Catch errors when query selecting
+				try {
+					var backendURL = document.getElementById("backendURL").dataset.backendurl;
+					// Only if the element with thumbnail id is avaliable,
+					if (classWork.querySelector("#thumbnail").innerHTML) {
+						// Set the thumbnail variable from the innerHTML
+						let thumbnailFile = classWork.querySelector("#thumbnail").innerHTML;
+						thumbnailURL = backendURL + thumbnailFile;
+						thumbnailParam = "t=" + classWork.querySelector("#thumbnail").innerHTML;
+						href = href + "&" + thumbnailParam;
+					}
+				} catch (e) {
+					thumbnailURL = DEFAULT_THUMBNAIL_URL.src;
+				}
+
+				var judul = classWork.querySelector("#judul").innerHTML;
+
+				let tanggal = "<owo class='text-primary text-sm underline'>" + classWork.querySelector("#tanggal").innerHTML + "</owo>";
+				let tanggalKumpul = "Deadline: " + classWork.querySelector("#tanggalKumpul").innerHTML;
+				let dikumpul = "Dikumpul dalam bentuk: " + classWork.querySelector("#dalam").innerHTML;
+				var body = tanggalKumpul + "\n" + dikumpul + "\n" + tanggal;
+
+				var tag = classWork.querySelector("#mataPelajaran").innerHTML;
+
+				// Add templated card
+				var card = document.createElement("card");
+				card.innerHTML = cardTemplate;
+				// Regex it with informations
+				card.innerHTML = card.innerHTML.replace(/{href}/g, href);
+				card.innerHTML = card.innerHTML.replace(/{title}/g, judul);
+				card.innerHTML = card.innerHTML.replace(/{body}/g, body);
+				card.innerHTML = card.innerHTML.replace(/{tag}/g, tag);
+				card.innerHTML = card.innerHTML.replace(DEFAULT_THUMBNAIL_URL.src, thumbnailURL);
+				// Append and remove the extra "card" HTMLelement on the outerHTML
+				cardList.appendChild(card);
+				card.id = "work-card";
+			});
+		}
+
+		await fetchData();
+		await generateCards();
+		hrefQuerySearch();
+	}
+	init();
+</script>
+<script is:inline>
+	function liveSearch(query = null) {
+		let seachbox = document.getElementById("searchbox");
+		let cards = Array.from(document.querySelectorAll("#work-card"));
+		let search_query = seachbox.value;
+		if (query) search_query = query;
+
+		for (var i = 0; i < cards.length; i++) {
+			if (cards[i].innerText.toLowerCase().includes(search_query.toLowerCase())) {
+				cards[i].className = "";
+			} else {
+				cards[i].className = "hidden";
+			}
+		}
+	}
+</script>
+<style>
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(15vw, 1fr));
+		gap: 1rem;
+		padding: 0;
+	}
+	@media (min-width: 1401px) and (max-width: 1920px) {
+		.link-card-grid {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(15vw, 1fr));
+			gap: 1rem;
+			padding: 0;
+		}
+	}
+	@media (min-width: 601px) and (max-width: 1400px) {
+		.link-card-grid {
+			grid-template-columns: repeat(2, minmax(1vw, 1fr));
+		}
+	}
+	@media (max-width: 600px) {
+		.link-card-grid {
+			grid-template-columns: repeat(auto-fit, minmax(100%, 2fr)) !important;
+		}
+	}
+</style>

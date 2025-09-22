@@ -1,0 +1,80 @@
+div#menu {
+    background-image: url("../images/bg1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+.m-header {
+    width: 100%;
+    display: flex;
+}
+
+.m-logo {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.m-body {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    filter: drop-shadow(0 0 5px #000000);
+}
+
+.m-footer {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    filter: drop-shadow(0 0 3px #000065a5);
+}
+
+.m-button {
+    margin: 0.5rem 0;
+    padding: 1rem 3rem;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #00000010;
+    border: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+.m-button:hover {
+    background-color: #00000050;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.m-button:focus {
+    background-color: #a4a4a453;
+}
+
+@media screen and (max-width: 1000px) {
+    .m-logo {
+        margin-top: 2rem;
+    }
+    .m-button {
+        padding: 1rem 5rem;
+    }
+}
+
+.m-footer>h6 {
+    text-align: center;
+}

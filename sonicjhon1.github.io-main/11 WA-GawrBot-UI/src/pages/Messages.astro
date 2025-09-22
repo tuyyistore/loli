@@ -1,0 +1,25 @@
+---
+import Message from "../components/Message.astro";
+
+export interface Props {
+	messages: object[];
+}
+
+const { messages } = Astro.props;
+---
+
+<div class="flex flex-1 flex-col py-2 px-6 bg-base-100 overflow-scroll" id="messages">
+    {
+		messages.reverse().map((messageData: any) => (
+			<Message
+				id={messageData.id}
+				messageCaption={messageData.messageCaption}
+                messageFromMe={messageData.messageFromMe}
+				messageHasMedia={messageData.messageHasMedia}
+				messageName={messageData.messageName || messageData.messageAuthor}
+				messageTimestamp={messageData.messageTimestamp}
+                profilePicture={messageData.messageProfile ? messageData.messageProfile[0]?.chatProfile : undefined}
+			/>
+		))
+	}
+</div>
